@@ -16,9 +16,6 @@
     <audio id="bg-music">
         <source src="./music.mp3" type="audio/mpeg">
     </audio>
-    <audio id="bg-music2">
-        <source src="./music2.mp3" type="audio/mpeg">
-    </audio>
 
     <div class="poem-container" id="poem-container" style="display: none;">
         <div class="poem" id="current-line"></div>
@@ -120,7 +117,6 @@
             "Anh yêu em rất nhiều."
         ];
 
-
         const images = document.querySelectorAll('.image');
         const contentContainer = document.getElementById('content-container');
         const poemContainer = document.getElementById('poem-container');
@@ -130,7 +126,6 @@
         const startScreen = document.getElementById('start-screen');
         const startButton = document.getElementById('start-button');
         const music = document.getElementById('bg-music');
-        const music2 = document.getElementById('bg-music2');
         const restartButton = document.getElementById('restart-button');
         const calendar = document.getElementById('calendar');
 
@@ -153,22 +148,6 @@
         // Khi music.mp3 kết thúc, reload trang
         music.addEventListener('ended', function () {
             location.reload();
-        });
-
-        // Khi music2.mp3 kết thúc, tăng âm lượng music.mp3 sau 3 giây
-        music2.addEventListener('ended', function () {
-            setTimeout(() => {
-                music.volume = 0.4; // Tăng âm lượng music.mp3 trở lại
-            }, 2000);
-            setTimeout(() => {
-                music.volume = 0.6; // Tăng âm lượng music.mp3 trở lại
-            }, 2500);
-            setTimeout(() => {
-                music.volume = 0.8; // Tăng âm lượng music.mp3 trở lại
-            }, 2000);
-            setTimeout(() => {
-                music.volume = 1.0; // Tăng âm lượng music.mp3 trở lại
-            }, 3000);
         });
 
         function showTextByLetter(element, text, speed = 100, callback) {
@@ -208,7 +187,6 @@
                         }, 600);
                     });
                 }, 100);
-
             } else {
                 setTimeout(() => {
                     poemContainer.style.display = 'none';
@@ -298,26 +276,12 @@
             music.volume = 1.0; // Đặt âm lượng ban đầu cho music.mp3
             music.play().catch(err => console.log('Không phát được music.mp3:', err));
 
-            // Unlock music2 ngay từ user click: play rồi pause ngay để bypass policy
-            music2.volume = 0; // Đảm bảo không nghe gì lúc unlock
-            music2.play().then(() => {
-                music2.pause(); // Pause ngay sau play để unlock mà không phát
-                music2.currentTime = 0; // Reset về đầu
-            }).catch(err => console.log('Lỗi unlock music2:', err));
-
             startScreen.style.display = 'none';
             startFallingText();
             setTimeout(() => {
-                // Bây giờ play music2 sau delay, vì đã unlocked nên sẽ chạy
-                music.volume = 0.1; // Giảm âm lượng music.mp3
-                music2.volume = 1.0; // Đặt âm lượng music2.mp3
-                music2.play().catch(err => console.log('Không phát được music2.mp3 sau delay:', err));
-                // Hiển thị bài thơ sau 5 giây
-                setTimeout(() => {
-                    poemContainer.style.display = 'block';
-                    showPoemLineByLine();
-                }, 5000);
-            }, 11000);
+                poemContainer.style.display = 'block';
+                showPoemLineByLine();
+            }, 11000); // Hiển thị bài thơ sau 11 giây
         });
     </script>
 </body>
