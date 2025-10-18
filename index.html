@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chúc Mừng 20/10</title>
     <link rel="stylesheet" href="./stylse.css">
 </head>
+
 <body>
     <div id="start-screen">
         <button id="start-button">Bắt đầu</button>
@@ -27,15 +29,63 @@
             <div class="calendar" id="calendar">
                 <h3>Tháng 10 - 2025</h3>
                 <table>
-                    <tr><th>T2</th><th>T3</th><th>T4</th><th>T5</th><th>T6</th><th>T7</th><th>CN</th></tr>
-                    <tr><td></td><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
-                    <tr><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
-                    <tr><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td></tr>
-                    <tr><td class="highlight">20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td></tr>
-                    <tr><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td></td><td></td></tr>
+                    <tr>
+                        <th>T2</th>
+                        <th>T3</th>
+                        <th>T4</th>
+                        <th>T5</th>
+                        <th>T6</th>
+                        <th>T7</th>
+                        <th>CN</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>8</td>
+                        <td>9</td>
+                        <td>10</td>
+                        <td>11</td>
+                        <td>12</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>14</td>
+                        <td>15</td>
+                        <td>16</td>
+                        <td>17</td>
+                        <td>18</td>
+                        <td>19</td>
+                    </tr>
+                    <tr>
+                        <td class="highlight">20</td>
+                        <td>21</td>
+                        <td>22</td>
+                        <td>23</td>
+                        <td>24</td>
+                        <td>25</td>
+                        <td>26</td>
+                    </tr>
+                    <tr>
+                        <td>27</td>
+                        <td>28</td>
+                        <td>29</td>
+                        <td>30</td>
+                        <td>31</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 </table>
             </div>
-            
+
             <div class="image-container">
                 <img src="anh2.jpg" class="image" id="image2">
                 <img src="anh3.jpg" class="image" id="image3">
@@ -67,8 +117,9 @@
             "Luôn giữ được nụ cười ấy",
             "Luôn tìm thấy bình yên và hạnh phúc",
             "Trong những điều nhỏ nhặt mỗi ngày.",
-            "Anh yêu em rất nhiều." 
+            "Anh yêu em rất nhiều."
         ];
+
 
         const images = document.querySelectorAll('.image');
         const contentContainer = document.getElementById('content-container');
@@ -100,12 +151,12 @@
         let currentImage = 0;
 
         // Khi music.mp3 kết thúc, reload trang
-        music.addEventListener('ended', function() {
+        music.addEventListener('ended', function () {
             location.reload();
         });
 
         // Khi music2.mp3 kết thúc, tăng âm lượng music.mp3 sau 3 giây
-        music2.addEventListener('ended', function() {
+        music2.addEventListener('ended', function () {
             setTimeout(() => {
                 music.volume = 0.4; // Tăng âm lượng music.mp3 trở lại
             }, 2000);
@@ -123,7 +174,7 @@
         function showTextByLetter(element, text, speed = 100, callback) {
             let index = 0;
             element.textContent = '';
-            
+
             function addLetter() {
                 if (index < text.length) {
                     element.textContent += text.charAt(index);
@@ -139,14 +190,14 @@
         function showPoemLineByLine() {
             if (currentLineIndex < poemLines.length) {
                 const line = poemLines[currentLineIndex];
-                
+
                 currentLineElement.style.opacity = '0';
                 currentLineElement.textContent = '';
-                
+
                 setTimeout(() => {
                     currentLineElement.style.opacity = '1';
                     currentLineElement.style.transition = 'opacity 0.5s';
-                    
+
                     showTextByLetter(currentLineElement, line, 80, () => {
                         setTimeout(() => {
                             currentLineElement.style.opacity = '0';
@@ -157,14 +208,14 @@
                         }, 600);
                     });
                 }, 100);
-                
+
             } else {
                 setTimeout(() => {
                     poemContainer.style.display = 'none';
                     contentContainer.style.display = 'block';
                     greeting.style.display = 'block';
                     document.body.classList.add('dark');
-                    
+
                     showCalendarFirst();
                     startSparkles();
                 }, 1000);
@@ -174,17 +225,17 @@
         function showCalendarFirst() {
             calendar.style.opacity = '1';
             calendar.style.transition = 'opacity 0.5s';
-            
+
             setTimeout(() => {
                 showNextImage();
-                
+
                 calendar.style.opacity = '0';
                 calendar.style.transition = 'opacity 2s';
-                
+
                 setTimeout(() => {
                     calendar.style.display = 'none';
                 }, 2000);
-                
+
             }, 4000);
         }
 
@@ -246,14 +297,22 @@
         startButton.addEventListener('click', () => {
             music.volume = 1.0; // Đặt âm lượng ban đầu cho music.mp3
             music.play().catch(err => console.log('Không phát được music.mp3:', err));
+
+            // Unlock music2 ngay từ user click: play rồi pause ngay để bypass policy
+            music2.volume = 0; // Đảm bảo không nghe gì lúc unlock
+            music2.play().then(() => {
+                music2.pause(); // Pause ngay sau play để unlock mà không phát
+                music2.currentTime = 0; // Reset về đầu
+            }).catch(err => console.log('Lỗi unlock music2:', err));
+
             startScreen.style.display = 'none';
             startFallingText();
             setTimeout(() => {
-                // Phát music2.mp3 trước và giảm âm lượng music.mp3
+                // Bây giờ play music2 sau delay, vì đã unlocked nên sẽ chạy
                 music.volume = 0.3; // Giảm âm lượng music.mp3
                 music2.volume = 1.0; // Đặt âm lượng music2.mp3
-                music2.play().catch(err => console.log('Không phát được music2.mp3:', err));
-                // Hiển thị bài thơ sau 2 giây
+                music2.play().catch(err => console.log('Không phát được music2.mp3 sau delay:', err));
+                // Hiển thị bài thơ sau 5 giây
                 setTimeout(() => {
                     poemContainer.style.display = 'block';
                     showPoemLineByLine();
@@ -262,4 +321,5 @@
         });
     </script>
 </body>
+
 </html>
